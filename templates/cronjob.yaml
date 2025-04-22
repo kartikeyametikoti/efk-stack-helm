@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: es-curator
+spec:
+  # Run daily at 02:00
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          # Use default service account or one with network access to ES
+          serviceAccountName: default
+          restartPolicy: OnFailure
+
+          containers:
+          - name: curator
+            image: bobrik/curator:5.8.1
+            command:
+              - curator
+              - --config
+              - /etc/curator/config.yml
+              - /etc/curator/actions.yml
+            volumeMounts:
+              - name: curator-config
+                mountPath: /etc/curator
+
+          volumes:
+            - name: curator-config
+              configMap:
+                name: es-curator-config

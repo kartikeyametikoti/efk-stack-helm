@@ -68,6 +68,7 @@ spec:
       serviceAccountName: {{ template "fullname.fluentdElasticsearch" . }}
       containers:
       - name: {{ template "fullname.fluentdElasticsearch" . }}
+        # image: 015800953128.dkr.ecr.us-east-1.amazonaws.com/fluentd-s3plugin:latest 
         image: "{{ .Values.fluentdElasticsearch.image.repository }}:{{ .Values.fluentdElasticsearch.image.tag }}"
         imagePullPolicy: {{ .Values.fluentdElasticsearch.image.pullPolicy }}
         env:

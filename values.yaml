@@ -56,6 +56,8 @@ fluentdElasticsearch:
   image:
     repository: k8s.gcr.io/fluentd-elasticsearch
     tag: v2.1.0
+    # repository: 015800953128.dkr.ecr.us-east-1.amazonaws.com/fluentd-s3plugin
+    # tag: latest
     pullPolicy: IfNotPresent
   resources:
     limits:
